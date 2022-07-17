@@ -9,9 +9,48 @@
 
     <link rel="stylesheet" href="src/styles.css"  />
     <div class="container">
-    <h1>Hello World</h1>
-    <a href="" class="btn btn-primary">Click Me</a>
-  </div>
+     <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <div class="overview">
+            <h1 id="city">
+                St. Pete
+            </h1>
+            <ul>
+              <li>Last updated: Sunday 09:50<span id="date"></span></li>
+              <li id="description">Sunny</li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="clearfix weather-temperature">
+                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="partly_cloudy" id="icon" class="float-left" />
+                <div class="float-left">
+                  <strong id="temperature"></strong>
+                  <span class="units"> 78</span>º C | F
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <ul>
+                <li>Precipitation: 25 <span id="precipitation"></span> %</li>
+                <li>Humidity: 75 <span id="humidity"></span>%</li>
+                <li>Wind: 5 <span id="wind"></span> m/h</li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+        <small>
+          <a
+            href="https://github.com/Lanestelle/WeatherProject"
+            target="_blank"
+            >Open-source code</a
+          >
+          by Mel Pendleton
+        </small>
+      </div>
+    </div>
+   
     <script src="src/index.js"></script>
   </body>
 </html>
