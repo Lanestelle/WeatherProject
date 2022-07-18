@@ -29,6 +29,30 @@ function formatDay(timestamp) {
 
   return days[day];
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["mon", "tue", "wed", "thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <div class="weather-forecast-date">
+                ${day} </div>
+                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" width="40"/> 
+                <div class="weather-forecast-temperatures">
+                  <span class ="weather-forecast-temperature-max">18º</span> 
+                  <span class ="weather-forceast-temperature-min">12ª</span></div> 
+            </div>
+          </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperature(response) {
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name;
@@ -91,3 +115,4 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 search("Tampa");
+displayForecast();
