@@ -31,31 +31,42 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["mon", "tue", "wed", "thu"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                <div class="weather-forecast-date">
-                ${day} </div>
-                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" width="40"/> 
-                <div class="weather-forecast-temperatures">
-                  <span class ="weather-forecast-temperature-max">18º</span> 
-                  <span class ="weather-forceast-temperature-min">12ª</span></div> 
-            </div>
-          </div>`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML += `
+      <div class="col-2">
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="weather-forecast-temperature-min"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div>
+      </div>
+  `;
+    }
   });
-
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  apiKey = "24e44405ec4458d131d2eebd";
-  apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`;
+  let apiKey = "766f9bb424e44405ec4458d131d2eebd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -122,4 +133,3 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 search("Tampa");
-displayForecast();
